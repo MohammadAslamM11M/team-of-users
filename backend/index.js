@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -11,8 +13,7 @@ app.use(express.json());
 const userRoutes = require("./routes/users");
 const teamRoutes = require("./routes/teams");
 
-const mongoURI =
-  "mongodb+srv://aslam071595:IOAlySTwHitbbprF@teamofuserscluster.cjffx.mongodb.net/TeamUsers?retryWrites=true&w=majority&appName=TeamOfUsersCluster";
+const mongoURI = process.env.MONGO_URI;
 
 mongoose
   .connect(mongoURI)
