@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
+const API_BASE_URL = "https://team-of-users.onrender.com";
+
 const TeamDetails = () => {
   const { id } = useParams();
   const [team, setTeam] = useState(null);
@@ -13,7 +15,7 @@ const TeamDetails = () => {
   }, [id]);
 
   const fetchTeamDetails = async () => {
-    const { data } = await axios.get(`/api/team/${id}`);
+    const { data } = await axios.get(`${API_BASE_URL}/api/team/${id}`);
     setTeam(data);
   };
 

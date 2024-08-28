@@ -3,6 +3,8 @@ import axios from "axios";
 import UserCard from "./UserCard";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = "https://team-of-users.onrender.com";
+
 const UserList = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -23,7 +25,7 @@ const UserList = () => {
 
   const fetchUsers = async () => {
     const { domain, gender, available } = filters;
-    const { data } = await axios.get("/api/users", {
+    const { data } = await axios.get(`${API_BASE_URL}/api/users`, {
       params: {
         page,
         search,
@@ -70,7 +72,7 @@ const UserList = () => {
     if (!teamName) return;
 
     try {
-      const response = await axios.post("/api/team", {
+      const response = await axios.post(`${API_BASE_URL}/api/team`, {
         name: teamName,
         members: selectedUsers,
       });
