@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UserCard from "./UserCard";
 import { useNavigate } from "react-router-dom";
+import "./UserList.css"
 
 const API_BASE_URL = "https://team-of-users.onrender.com";
 
@@ -87,92 +88,95 @@ const UserList = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="mb-4">
-        <input
-          type="text"
-          value={search}
-          onChange={handleSearch}
-          placeholder="Search by name..."
-          className="p-2 border rounded w-full"
-        />
-        <div className="mt-4">
-          <select
-            name="domain"
-            onChange={handleFilterChange}
-            value={filters.domain}
-            className="p-2 border rounded"
-          >
-            <option value="">All Domains</option>
-            <option value="Sales">Sales</option>
-            <option value="Finance">Finance</option>
-            <option value="IT">IT</option>
-            <option value="Management">Management</option>
-            <option value="UI Designing">UI Designing</option>
-          </select>
-          <select
-            name="gender"
-            onChange={handleFilterChange}
-            value={filters.gender}
-            className="p-2 border rounded ml-2"
-          >
-            <option value="">All Genders</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Agender">Agender</option>
-            <option value="Bigender">Bigender</option>
-          </select>
-          <select
-            name="available"
-            onChange={handleFilterChange}
-            value={filters.available}
-            className="p-2 border rounded ml-2"
-          >
-            <option value="">All Availability</option>
-            <option value="true">Available</option>
-            <option value="false">Not Available</option>
-          </select>
+    <div className="container flex flex-row">
+      <div className="mx-12 p-4">
+        <div className="mb-4">
+          <input
+            type="text"
+            value={search}
+            onChange={handleSearch}
+            placeholder="Search by name..."
+            className="p-2 border rounded w-full"
+          />
+          <div className="mt-4">
+            <select
+              name="domain"
+              onChange={handleFilterChange}
+              value={filters.domain}
+              className="p-2 border rounded"
+            >
+              <option value="">All Domains</option>
+              <option value="Sales">Sales</option>
+              <option value="Finance">Finance</option>
+              <option value="IT">IT</option>
+              <option value="Management">Management</option>
+              <option value="UI Designing">UI Designing</option>
+            </select>
+            <select
+              name="gender"
+              onChange={handleFilterChange}
+              value={filters.gender}
+              className="p-2 border rounded ml-2"
+            >
+              <option value="">All Genders</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Agender">Agender</option>
+              <option value="Bigender">Bigender</option>
+            </select>
+            <select
+              name="available"
+              onChange={handleFilterChange}
+              value={filters.available}
+              className="p-2 border rounded ml-2"
+            >
+              <option value="">All Availability</option>
+              <option value="true">Available</option>
+              <option value="false">Not Available</option>
+            </select>
+          </div>
         </div>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {users.map((user) => (
-          <UserCard key={user.id} user={user} onSelect={handleSelectUser} />
-        ))}
-      </div>
-      <div className="mt-4">
-        <button
-          disabled={page === 1}
-          onClick={() => setPage(page - 1)}
-          className="bg-blue-500 text-white py-1 px-3 rounded mr-2"
-        >
-          Previous
-        </button>
-        <span>
-          Page {page} of {totalPages}
-        </span>
-        <button
-          disabled={page === totalPages}
-          onClick={() => setPage(page + 1)}
-          className="bg-blue-500 text-white py-1 px-3 rounded ml-2"
-        >
-          Next
-        </button>
-      </div>
-      <div className="mt-4">
-        <h3 className="text-xl font-bold mb-2">Selected Users:</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {selectedUsers.map((user) => (
-            <UserCard key={user.id} user={user} onSelect={() => {}} />
+          {users.map((user) => (
+            <UserCard key={user.id} user={user} onSelect={handleSelectUser} />
           ))}
         </div>
+        <div className="mt-4 flex justify-evenly">
+          <button
+            disabled={page === 1}
+            onClick={() => setPage(page - 1)}
+            className="bg-indigo-100 hover:bg-indigo-200 text-black py-1 px-3 rounded mr-2"
+          >
+            Previous
+          </button>
+          <span>
+            Page {page} of {totalPages}
+          </span>
+          <button
+            disabled={page === totalPages}
+            onClick={() => setPage(page + 1)}
+            className="bg-indigo-100 hover:bg-indigo-200 text-black py-1 px-3 rounded ml-2"
+          >
+            Next
+          </button>
+        </div>
       </div>
-
-      <button
-        onClick={createTeam}
-        className="mt-4 bg-green-500 text-white py-2 px-4 rounded"
-      >
-        Create Team
-      </button>
+      <div className="basis-1/3">
+        <div className="sticky top-0 mt-4 p-4 rounded-lg border-4 border-indigo-500/20 hover:border-slate-400 relative" style={{height: "34%"}}>
+          <h3 className="text-xl mb-2">Selected Users</h3>
+          <div className="grid grid-cols-1 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 overflow-y-scroll hide-scrollbar" style={{height: "85%"}}>
+            {selectedUsers.map((user) => (
+              <UserCard key={user.id} user={user} onSelect={() => {}} />
+            ))}
+          </div>
+          <button
+            onClick={createTeam}
+            className="mt-4 bg-green-200 hover:bg-green-300 text-black py-2 px-4 rounded absolute bottom-4"
+          >
+            Create Team
+          </button>
+        </div>
+      </div>
     </div>
   );
 };
