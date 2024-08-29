@@ -90,7 +90,7 @@ const UserList = () => {
   return (
     <div className="container flex flex-row">
       <div className="mx-12 p-4">
-        <div className="mb-4">
+        <div className="mb-4 py-4 sticky top-0 bg-white">
           <input
             type="text"
             value={search}
@@ -141,11 +141,11 @@ const UserList = () => {
             <UserCard key={user.id} user={user} onSelect={handleSelectUser} />
           ))}
         </div>
-        <div className="mt-4 flex justify-evenly">
+        <div className="mt-4 py-4 flex justify-evenly sticky bottom-0 bg-white">
           <button
             disabled={page === 1}
             onClick={() => setPage(page - 1)}
-            className="bg-indigo-100 hover:bg-indigo-200 text-black py-1 px-3 rounded mr-2"
+            className="bg-indigo-100 hover:bg-indigo-200 text-black py-1 px-3 rounded-md mr-2"
           >
             Previous
           </button>
@@ -155,7 +155,7 @@ const UserList = () => {
           <button
             disabled={page === totalPages}
             onClick={() => setPage(page + 1)}
-            className="bg-indigo-100 hover:bg-indigo-200 text-black py-1 px-3 rounded ml-2"
+            className="bg-indigo-100 hover:bg-indigo-200 text-black py-1 px-3 rounded-md ml-2"
           >
             Next
           </button>
@@ -171,7 +171,7 @@ const UserList = () => {
           </div>
           <button
             onClick={createTeam}
-            className="mt-4 bg-green-200 hover:bg-green-300 text-black py-2 px-4 rounded absolute bottom-4"
+            className="mt-4 bg-green-200 hover:bg-green-300 text-black py-2 px-4 rounded-md absolute bottom-4"
           >
             Create Team
           </button>

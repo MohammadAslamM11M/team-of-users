@@ -23,19 +23,21 @@ const TeamDetails = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <button
-        onClick={() => navigate("/")}
-        className="bg-blue-500 text-white py-2 px-4 rounded mb-4"
-      >
-        Back to Home
-      </button>
+      <div className="sticky top-0 bg-white py-4">
+        <button
+          onClick={() => navigate("/")}
+          className="bg-indigo-200 hover:bg-indigo-300 text-white py-2 px-4 rounded-md mb-4 text-black"
+        >
+          Back to Home
+        </button>
 
-      <h1 className="text-2xl font-bold mb-4">Team: {team.name}</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <h1 className="text-2xl mb-4">Team {team.name}</h1>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 m-8">
         {team.members.map((user) => (
           <div
             key={user._id}
-            className="bg-white shadow-md rounded-lg p-4 mb-4"
+            className="bg-white shadow-md hover:shadow-lg rounded-lg p-4 mb-4"
           >
             <img
               src={user.avatar}
